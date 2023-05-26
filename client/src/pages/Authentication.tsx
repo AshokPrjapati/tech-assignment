@@ -1,20 +1,30 @@
 import { FormEvent, useRef, useState } from "react";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import styles from "./Authentication.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { login, signup } from "../redux/auth/auth.action";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast"
+import { UserProps } from "../constant/constant";
+import { RootState } from "../redux/store";
+import { Dispatch } from "redux";
 
 const Authentication = () => {
     const [signin, setSignin] = useState<boolean>(true);
     const [showPassword, setShowPassword] = useState<boolean>(false);
-    const [loading, setLoading] = useState<boolean>(false);
+    const loading = useSelector((store: RootState) => store.auth.loading)
+    const dispatch: Dispatch<any> = useDispatch();
+    const navigate = useNavigate();
 
     const formRef = useRef(null);
 
     // handel the submission of form
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        // prevent the page from refresh and auto submit form
         e.preventDefault();
 
         // credentials for signIn
-        let credentials = {};
+        let credentials: UserProps = { email: "", password: "" };
 
         if (formRef.current) {
             credentials = {
@@ -23,9 +33,15 @@ const Authentication = () => {
             }
         }
 
+        if (signin) {
+            dispatch(login(credentials, navigate, toast));
+            return;
+        }
+
         // for Signup
         if (!signin) {
             credentials = { ...credentials, name: formRef.current.name.value }
+            dispatch(signup(credentials, navigate, toast));
         }
 
         // console.log(credentials);
