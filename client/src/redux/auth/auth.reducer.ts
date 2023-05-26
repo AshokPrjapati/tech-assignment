@@ -23,7 +23,7 @@ export const Reducer = (state = initialState, { type, payload }: any) => {
           case Types.SIGNIN_SUCCESS:
                return ({ ...state, loading: false, error: '', userCredential: payload, authenticated: true })
           case Types.SIGNUP_SUCCESS:
-               return ({ ...state, loading: false, error: '', userCredential: payload, authenticated: true });
+               return ({ ...state, loading: false, error: '' });
           case Types.AUTH_OPERATION_SUCCESS:
                return ({ ...state, loading: false, error: '', });
           case Types.SIGNOUT_SUCCESS:

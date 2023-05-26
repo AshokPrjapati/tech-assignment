@@ -20,22 +20,18 @@ export const login =
     try {
       console.log(credentials);
       const res = await axios.post("/user/login", credentials);
-      if (res.status >= 400 && res.status < 500) {
-        dispatch({ type: Types.AUTH_ERROR, payload: res.data.message });
-        navigate("/login");
-      } else {
+  
         dispatch({ type: Types.SIGNIN_SUCCESS, payload: res.data.credentials });
         sessionStorage.setItem(
           "user",
           JSON.stringify({
+            name:res.data.credentials.name,
             id: res.data.credentials._id,
             token: res.data.token,
           })
         );
-        console.log(res.data.credentials);
-        toast.success("SignIn successfull");
+        toast.success(res.data.message);
         navigate("/");
-      }
     } catch (err) {
       dispatch({ type: Types.AUTH_ERROR });
       toast.error("Something went wrong");
@@ -44,7 +40,7 @@ export const login =
 };
 
 export const signup =
-  (credentials: UserProps, navigate: Function, toast: any) =>
+  (credentials: UserProps, navigate: Function, toast: any, setSignIn:Function) =>
   async (dispatch: Dispatch) => {
     // form validation
     const { email, password, name } = credentials;
@@ -57,17 +53,14 @@ export const signup =
     // form submission
     dispatch({ type: Types.AUTH_LOADING });
     try {
-      console.log(credentials);
       const res = await axios.post("/user/register", credentials);
-      dispatch({ type: Types.SIGNUP_SUCCESS, payload: res.data.credentials });
-      sessionStorage.setItem(
-        "user",
-        JSON.stringify({ id: res.data.credentials._id })
-      );
-      toast.success("Register Successfull");
-      navigate("/login");
+      console.log(res)
+      dispatch({ type: Types.SIGNUP_SUCCESS });
+      toast.success(res.data.message);
+      setSignIn(true);
+      navigate("/auth");
     } catch (error) {
       dispatch({ type: Types.AUTH_ERROR });
-      toast.error("Something went wrong");
+      toast.error(error?.response?.data?.message || "something went wrong");
     }
   };

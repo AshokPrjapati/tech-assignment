@@ -41,7 +41,7 @@ const Authentication = () => {
         // for Signup
         if (!signin) {
             credentials = { ...credentials, name: formRef.current.name.value }
-            dispatch(signup(credentials, navigate, toast));
+            dispatch(signup(credentials, navigate, toast, setSignin));
         }
 
         // console.log(credentials);

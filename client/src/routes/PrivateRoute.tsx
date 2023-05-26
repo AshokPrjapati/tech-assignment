@@ -10,7 +10,8 @@ interface PrivateRouteProps {
 
 const PrivateRoute = ({ children }: PrivateRouteProps) => {
     const { authenticated } = useSelector((store: RootState) => store.auth);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    console.log(authenticated)
+    const [isAuthenticated, setIsAuthenticated] = useState(authenticated);
 
     useEffect(() => {
         setIsAuthenticated(authenticated);
