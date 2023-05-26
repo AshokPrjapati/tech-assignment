@@ -1,0 +1,30 @@
+.navbar {
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem;
+    align-items: center;
+    border-bottom: 1px solid;
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5);
+    font-size: 1.1rem;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.navbar>ul {
+    list-style: none;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.active {
+    color: rgb(17, 174, 17);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.default {
+    color: grey;
+    text-decoration: none;
+}
