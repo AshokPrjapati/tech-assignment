@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import styles from "./Authentication.module.css";
 
@@ -6,26 +6,51 @@ const Authentication = () => {
     const [signin, setSignin] = useState<boolean>(true);
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
+
+    const formRef = useRef(null);
+
+    // handel the submission of form
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        // credentials for signIn
+        let credentials = {};
+
+        if (formRef.current) {
+            credentials = {
+                email: formRef.current.email.value,
+                password: formRef.current.password.value
+            }
+        }
+
+        // for Signup
+        if (!signin) {
+            credentials = { ...credentials, name: formRef.current.name.value }
+        }
+
+        // console.log(credentials);
+
+    }
+
     return (
         <div className={styles.form_container}>
             <h1>{signin ? "SignIn" : "Signup"}</h1>
-            <form>
+            <form ref={formRef} onSubmit={handleSubmit}>
                 {/* User name Field */}
                 <div
                     className={styles.input_box}
                     style={{ display: signin ? "none" : "block" }}
                 >
-                    <label htmlFor="name">Name</label>
                     <input type="text" id="name" />
+                    <label htmlFor="name">Name</label>
                 </div>
                 {/* User email field */}
                 <div className={styles.input_box}>
-                    <label htmlFor="email">Name</label>
-                    <input type="text" id="name" />
+                    <input type="text" id="email" required />
+                    <label htmlFor="email">Email</label>
                 </div>
                 {/* User password field */}
                 <div className={styles.input_box}>
-                    <label htmlFor="password">Password</label>
                     <input
                         id="password"
                         type={showPassword ? "text" : "password"}
@@ -39,9 +64,10 @@ const Authentication = () => {
                     >
                         {showPassword ? <IoEyeOffOutline /> : <IoEyeOutline />}
                     </span>
+                    <label htmlFor="password">Password</label>
                 </div>
                 {/* Submit button */}
-                <div>
+                <div className={styles.form_submit}>
                     <input
                         type="submit"
                         value={loading ? "Wait..." : signin ? "Sign in" : "Sign up"}

@@ -1,0 +1,87 @@
+.form_container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+    text-align: center;
+    border-radius: 5px;
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.1);
+    min-width: 320px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.input_box {
+    text-align: left;
+    position: relative;
+    width: 100%;
+}
+
+.input_box>input {
+    padding: 5px;
+    width: 100%;
+    font-size: 1rem;
+}
+
+.input_box>span {
+    border: 1px solid;
+    height: 100%;
+    padding: 5px 1rem;
+    font-weight: bolder;
+    background-color: grey;
+    cursor: pointer;
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.input_box>label {
+    position: absolute;
+    color: grey;
+    left: 5px;
+    top: 0;
+    letter-spacing: 2px;
+    pointer-events: none;
+    transition: transform .1s linear .1s;
+}
+
+.input_box>input:focus~.input_box>label,
+input:not(:placeholder-shown)~label {
+    left: 0;
+    transform: translate(0, -20px);
+    font-size: 12px;
+}
+
+.form_submit {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1rem;
+}
+
+input[type="submit"],
+.form_submit>span {
+    cursor: pointer;
+    padding: .4rem .8rem;
+}
+
+.form_submit>span {
+    border-radius: 5px;
+    border: 1px solid transparent;
+}
+
+.form_submit>span:hover {
+    border: 1px solid;
+}
