@@ -1,5 +1,4 @@
 .button {
-    /* flex items-center justify-center gap-4 relative disabled:opacity-70 disabled:cursor-not-allowed rounded-lg hover:opacity-80 transition w-full */
     display: flex;
     align-items: center;
     justify-content: center;
