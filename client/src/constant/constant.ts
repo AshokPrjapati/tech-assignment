@@ -14,6 +14,7 @@ export interface AuthInitialStateProps{
 
 export interface CarDetailsProps{
     _id?:string;
+    modelImage:string;
     modelName:string; 
     modelYear:string; 
     modelPrice:number; 
