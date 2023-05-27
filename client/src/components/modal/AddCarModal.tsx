@@ -1,10 +1,11 @@
 import Modal from './Modal';
 import styles from "./AddCarModel.module.css"
 import { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-hot-toast';
 import { Dispatch } from 'redux';
 import { CreatePost } from '../../redux/post/addPost/addPost.action';
+import { RootState } from '../../redux/store';
 interface AddCarModalProps {
     isOpen: boolean;
     onClose: () => void;
@@ -13,6 +14,7 @@ interface AddCarModalProps {
 const AddCarModal = ({ isOpen, onClose }: AddCarModalProps) => {
     const bodyRef = useRef(null);
     const dispatch: Dispatch<any> = useDispatch();
+    const loading: boolean = useSelector((store: RootState) => store.addPost);
 
     let imgUrl: string;
 
@@ -125,6 +127,7 @@ const AddCarModal = ({ isOpen, onClose }: AddCarModalProps) => {
             actionLabel="Add Car Details"
             onSubmit={handleSubmit}
             body={bodyContent}
+            disabled={loading}
         />
     )
 }
