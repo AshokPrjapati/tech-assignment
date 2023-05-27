@@ -4,7 +4,7 @@ import { UserProps } from "../../constant/constant";
 import { Dispatch } from "redux";
 
 export const login =
-  (credentials: UserProps, navigate: Function, toast: any) =>
+  (credentials: UserProps, navigate: any, toast: any) =>
   async (dispatch: Dispatch) => {
     // email validation
     const { email, password } = credentials;
@@ -12,15 +12,17 @@ export const login =
       return toast.error("Invalid email");
 
     // check password length
-    if (password.length < 6)
+    if(password){
+       if (password.length < 6)
       return toast.error("Password length should be at least 6");
-
+    }else return toast.error("Please enter password");
+   
     // form submission
     dispatch({ type: Types.AUTH_LOADING });
     try {
-      console.log(credentials);
       const res = await axios.post("/user/login", credentials);
       const token = res.data.token;
+      console.log(res.data)
 
       const payload = {...res.data.credentials, token}
   
@@ -28,22 +30,21 @@ export const login =
         sessionStorage.setItem(
           "user",
           JSON.stringify({
-            name:res.data.credentials.name,
-            id: res.data.credentials._id,
+            user: res.data.credentials,
             token: res.data.token,
           })
         );
         toast.success(res.data.message);
         navigate("/");
-    } catch (err) {
+    } catch (err:any) {
       dispatch({ type: Types.AUTH_ERROR });
-      toast.error("Something went wrong");
-      throw err;
+      console.log(err)
+      toast.error(err?.response?.data?.message || "Something went wrong");
     }
 };
 
 export const signup =
-  (credentials: UserProps, navigate: Function, toast: any, setSignIn:Function) =>
+  (credentials: UserProps, navigate: any, toast: any, setSignIn:any) =>
   async (dispatch: Dispatch) => {
     // form validation
     const { email, password, name } = credentials;
@@ -62,7 +63,7 @@ export const signup =
       toast.success(res.data.message);
       setSignIn(true);
       navigate("/auth");
-    } catch (error) {
+    } catch (error:any) {
       dispatch({ type: Types.AUTH_ERROR });
       toast.error(error?.response?.data?.message || "something went wrong");
     }

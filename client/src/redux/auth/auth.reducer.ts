@@ -1,17 +1,15 @@
 import { AuthInitialStateProps} from '../../constant/constant';
 import * as Types from './auth.types';
 
-const initialUserCredState = {
-     name: "",
-     email: "",
-     password: "",
-}
+const user = sessionStorage.getItem("user") ;
+const authenticated = user && JSON.parse(user).token ? true : false;
+
 
 const initialState: AuthInitialStateProps = {
      loading: false,
      error: '',
-     authenticated: false,
-     userCredential: initialUserCredState
+     authenticated,
+     userCredential: user ? JSON.parse(user).user : null
 }
 
 export const Reducer = (state = initialState, { type, payload }: any) => {
@@ -28,7 +26,6 @@ export const Reducer = (state = initialState, { type, payload }: any) => {
                return ({ ...state, loading: false, error: '', });
           case Types.SIGNOUT_SUCCESS:
                return initialState;
-          default:
-               return state;
+          default: return state;      
      }
 }

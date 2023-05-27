@@ -39,18 +39,18 @@ exports.UserRegisteration = async (req, res) => {
 exports.UserLogin = async (req, res) => {
     const { password, email } = req.body;
     try {
-        const user = await UserModel.findOne({ email }).select('password')
+        const user = await UserModel.findOne({ email });
         if (user) {
             const isMatched = await bcrypt.compare(password, user.password);
             delete user.password;
             if (isMatched) {
                 const token = await jwt.sign({ email }, process.env.SECRET_KEY);
-                res.status(201).json({ status: 200, message: "Login Success", credentials: user, token })
+                res.status(201).json({ message: "Login Success", credentials: user, token })
             } else {
-                res.status(201).json({ status: 401, message: "password not matched" })
+                res.status(401).json({ message: "password not matched" })
             }
         } else {
-            res.status(201).json({ status: 400, message: "user not found." })
+            res.status(401).json({ message: "user not found." })
         }
     } catch (error) {
         console.log('error: ', error);
