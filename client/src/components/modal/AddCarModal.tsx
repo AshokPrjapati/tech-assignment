@@ -3,6 +3,8 @@ import styles from "./AddCarModel.module.css"
 import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-hot-toast';
+import { Dispatch } from 'redux';
+import { CreatePost } from '../../redux/post/addPost/addPost.action';
 interface AddCarModalProps {
     isOpen: boolean;
     onClose: () => void;
@@ -10,7 +12,7 @@ interface AddCarModalProps {
 
 const AddCarModal = ({ isOpen, onClose }: AddCarModalProps) => {
     const bodyRef = useRef(null);
-    const dispatch = useDispatch();
+    const dispatch: Dispatch<any> = useDispatch();
 
     let imgUrl: string;
 
@@ -54,13 +56,13 @@ const AddCarModal = ({ isOpen, onClose }: AddCarModalProps) => {
                 registerPlace: bodyRef.current.register_place.value,
             }
 
-            console.log(carDetail)
-
             const { modelName, modelYear, modelPrice, modelColor, modelMileage, odometerKM, majorScratch, accidents, buyers, registerPlace } = carDetail;
 
             if (!modelName || !modelYear || !modelPrice || !modelColor || !modelMileage || !odometerKM || !majorScratch || !accidents || !buyers || !registerPlace) {
                 toast.error("Please fill all the fields");
             }
+
+            dispatch(CreatePost);
         }
 
     }

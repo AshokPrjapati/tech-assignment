@@ -24,5 +24,6 @@ export interface CarDetailsProps{
     majorScratch:string; 
     accidents:number; 
     buyers:number; 
-    registerPlace:string
+    registerPlace:string;
+    email?:string
 }

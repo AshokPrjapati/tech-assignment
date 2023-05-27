@@ -10,7 +10,7 @@ export const CreatePost = (id:string,carDetails:CarDetailsProps,onClose:()=>void
         const res = await axios.patch(`/post/update/${id}`,carDetails);
         const data = await res.data;
 
-        dispatch({type:Types.UPDATE_POST_SUCCESS, payload:data.post});
+        dispatch({type:Types.UPDATE_POST_SUCCESS});
         toast.success(data.message ||  "Car details updated successfully");
         onClose();
 
