@@ -1,7 +1,14 @@
+import Button from "../components/Button"
+import AddCarModal from "../components/modal/AddCarModal";
+import useToggle from "../hooks/useToggle";
 
 const Dashboard = () => {
+    const { isOpen, onOpen, onClose } = useToggle();
     return (
-        <div>Dashboard</div>
+        <>
+            <Button label="Add inventory" onClick={onOpen} />
+            {isOpen && <AddCarModal isOpen={isOpen} onClose={onClose} />}
+        </>
     )
 }
 

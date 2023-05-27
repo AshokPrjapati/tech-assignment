@@ -1,6 +1,6 @@
 import React from 'react'
 
-function useAddModal(initial = false) {
+function useToggle(initial = false) {
     const [isOpen, setIsOpen] = React.useState<boolean>(initial);
 
     const useToggle = {
@@ -12,4 +12,4 @@ function useAddModal(initial = false) {
     return useToggle
 }
 
-export default useAddModal
+export default useToggle

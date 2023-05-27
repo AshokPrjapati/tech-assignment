@@ -12,11 +12,9 @@ interface ModalProps {
     footer?: React.ReactElement;
     actionLabel: string;
     disabled?: boolean;
-    secondaryAction?: () => void;
-    secondaryActionLabel?: string
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onSubmit, title, body, footer, actionLabel, disabled, secondaryAction, secondaryActionLabel }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onSubmit, title, body, footer, actionLabel, disabled }) => {
     const [showModal, setShowModal] = useState(isOpen);
 
     useEffect(() => {
@@ -36,45 +34,36 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onSubmit, title, body, f
         onSubmit();
     }, [disabled, onSubmit]);
 
-    const handelSecondaryAction = useCallback(() => {
-        if (disabled || !secondaryAction) return;
-        secondaryAction();
-    }, [disabled, secondaryAction])
 
     if (!isOpen) return null;
 
     return (
         <div className={styles.modal}>
-            <div>
-                {/* modal content */}
-                <div className={showModal ? styles.show_modal : styles.hide_modal}>
-                    <div className={styles.modal_content}>
-                        {/* header */}
-                        <header className={styles.header}>
-                            <button onClick={handleClose}>
-                                <IoMdClose size={18} />
-                            </button>
-                            <div>{title}</div>
-                        </header>
-                        {/* body */}
-                        <div className={styles.modal_body}>
-                            {body}
-                        </div>
-                        {/* footer */}
-                        <div className={styles.footer}>
-                            <div>
-                                {/* Secondary Action button */}
-                                {secondaryAction && secondaryActionLabel &&
-                                    <Button label={secondaryActionLabel} disabled={disabled} onClick={secondaryAction} outline />
-                                }
 
-                                <Button label={actionLabel} disabled={disabled} onClick={handleSubmit} />
-                            </div>
-                            {footer}
+            {/* modal content */}
+            <div className={showModal ? styles.show_modal : styles.hide_modal}>
+                <div className={styles.modal_content}>
+                    {/* header */}
+                    <header className={styles.header}>
+                        <div>{title}</div>
+                        <button onClick={handleClose}>
+                            <IoMdClose size={18} />
+                        </button>
+                    </header>
+                    {/* body */}
+                    <div className={styles.modal_body}>
+                        {body}
+                    </div>
+                    {/* footer */}
+                    <div className={styles.footer}>
+                        <div>
+                            <Button label={actionLabel} disabled={disabled} onClick={handleSubmit} small={true} />
                         </div>
+                        {footer}
                     </div>
                 </div>
             </div>
+
         </div>
     )
 }

@@ -11,3 +11,17 @@ export interface AuthInitialStateProps{
     authenticated: boolean
     userCredential: UserProps
 }
+
+export interface CarDetailsProps{
+    _id?:string;
+    modelName:string; 
+    modelYear:string; 
+    modelPrice:number; 
+    modelColor:string; 
+    modelMileage:number; 
+    odometerKM:number; 
+    majorScratch:string; 
+    accidents:number; 
+    buyers:number; 
+    registerPlace:string
+}

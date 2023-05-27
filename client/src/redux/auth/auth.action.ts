@@ -20,8 +20,11 @@ export const login =
     try {
       console.log(credentials);
       const res = await axios.post("/user/login", credentials);
+      const token = res.data.token;
+
+      const payload = {...res.data.credentials, token}
   
-        dispatch({ type: Types.SIGNIN_SUCCESS, payload: res.data.credentials });
+        dispatch({ type: Types.SIGNIN_SUCCESS, payload });
         sessionStorage.setItem(
           "user",
           JSON.stringify({

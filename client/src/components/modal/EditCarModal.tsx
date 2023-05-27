@@ -1,9 +1,11 @@
-import React from 'react'
-import useEditModal from '../../hooks/useEditModal';
 import Modal from "./Modal"
 
-const EditCarModal = () => {
-    const { isOpen, onClose } = useEditModal(false);
+interface EditCarModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+}
+
+const EditCarModal = ({ isOpen, onClose }: EditCarModalProps) => {
     return (
         <Modal
             isOpen={isOpen}
