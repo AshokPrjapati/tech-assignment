@@ -12,9 +12,10 @@ const Home = () => {
     const { allPosts } = useSelector((store: RootState) => store.getPosts);
     const dispatch: Dispatch<any> = useDispatch();
 
+    console.log(allPosts)
 
     useEffect(() => {
-        dispatch(getPosts);
+        dispatch(getPosts());
     }, [])
 
     return (

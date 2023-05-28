@@ -1,6 +1,6 @@
 import Modal from './Modal';
 import styles from "../../styles/AddCarModel.module.css";
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-hot-toast';
 import { Dispatch } from 'redux';
@@ -15,14 +15,14 @@ const AddCarModal = ({ isOpen, onClose }: AddCarModalProps) => {
     const bodyRef: React.MutableRefObject<any> = useRef(null);
     const dispatch: Dispatch<any> = useDispatch();
     const { loading } = useSelector((store: RootState) => store.addPost);
-
-    let imgUrl: string;
+    const { selectedOem } = useSelector((store: RootState) => store.oem);
+    const [imgurl, setImgUrl] = useState("")
 
     // handle the image upload
     const handleImage = async () => {
         if (bodyRef.current) {
             try {
-                const imgInput = bodyRef.current.model_image;
+                const imgInput = bodyRef.current.carImage;
                 const img = imgInput.files[0];
 
                 const form = new FormData();
@@ -34,9 +34,7 @@ const AddCarModal = ({ isOpen, onClose }: AddCarModalProps) => {
                 });
                 const data = await res.json();
 
-                imgUrl = data.data.display_url
-                console.log(imgUrl);
-
+                setImgUrl(data.data.display_url);
             } catch (error) {
                 console.log(error);
             }
@@ -46,64 +44,54 @@ const AddCarModal = ({ isOpen, onClose }: AddCarModalProps) => {
     }
 
     const handleSubmit = () => {
-        if (bodyRef.current) {
+        if (bodyRef.current && imgurl) {
             const carDetail = {
-                modelImage: imgUrl,
-                modelName: bodyRef.current.model_name.value,
-                modelYear: bodyRef.current.model_year.value,
-                modelPrice: bodyRef.current.model_price.value,
-                modelColor: bodyRef.current.model_color.value,
-                modelMileage: bodyRef.current.model_mileage.value,
-                odometerKM: bodyRef.current.model_km.value,
-                majorScratch: bodyRef.current.model_scratch.value,
-                accidents: bodyRef.current.model_accident.value,
-                buyers: bodyRef.current.model_buyers.value,
-                registerPlace: bodyRef.current.register_place.value,
+                oemSpec: selectedOem,
+                carImage: imgurl,
+                odometer: bodyRef.current.odometer.value,
+                majorScratches: bodyRef.current.model_scratch.value,
+                noOfAccidents: bodyRef.current.model_accident.value,
+                noOfPreviousBuyers: bodyRef.current.model_buyers.value,
+                registrationPlace: bodyRef.current.register_place.value,
+                originalPaint: bodyRef.current.register_place.checked
             }
 
-            const { modelName, modelYear, modelPrice, modelColor, modelMileage, odometerKM, majorScratch, accidents, buyers, registerPlace } = carDetail;
+            const { oemSpec, majorScratches, odometer, noOfAccidents, noOfPreviousBuyers, registrationPlace } = carDetail;
 
-            if (!modelName || !modelYear || !modelPrice || !modelColor || !modelMileage || !odometerKM || !majorScratch || !accidents || !buyers || !registerPlace) {
-                toast.error("Please fill all the fields");
+            if (!oemSpec || !odometer || !majorScratches || !noOfAccidents || !noOfPreviousBuyers || !registrationPlace) {
+                return toast.error("Please fill all the fields");
             }
-
-            dispatch(CreatePost);
+            dispatch(CreatePost(carDetail, onClose, toast));
+        } else {
+            return toast("Please wait car image is uploading", {
+                icon: '..',
+                style: {
+                    borderRadius: '10px',
+                    background: '#333',
+                    color: '#fff',
+                },
+            });
         }
 
     }
 
+
     const bodyContent = (
         <form className={styles.body} ref={bodyRef}>
-            <div className={styles.input_box}>
-                <input type="file" id="model_image" onChange={handleImage} />
-                <label htmlFor="model_name">Image of model</label>
+            <div >
+                <label htmlFor="original_paint" className={styles.label}>Original Paint:</label>
+                <input type="checkbox" id="original_paint" />
             </div>
             <div className={styles.input_box}>
-                <input type="text" id="model_name" />
-                <label htmlFor="model_name">Name of model</label>
+                <input type="file" id="carImage" onChange={handleImage} />
+                <label htmlFor="carImage">Image of Car</label>
             </div>
             <div className={styles.input_box}>
-                <input type="number" id="model_year" />
-                <label htmlFor="model_year">Year of model</label>
+                <input type="number" id="odometer" />
+                <label htmlFor="odometer">KM in odometer</label>
             </div>
             <div className={styles.input_box}>
-                <input type="number" id="model_price" />
-                <label htmlFor="model_price">Price</label>
-            </div>
-            <div className={styles.input_box}>
-                <input type="number" id="model_mileage" />
-                <label htmlFor="model_mileage">Mileage in (KMPL)</label>
-            </div>
-            <div className={styles.input_box}>
-                <input type="number" id="model_km" />
-                <label htmlFor="model_km">KM in odometer</label>
-            </div>
-            <div className={styles.input_box}>
-                <input type="text" id="model_color" />
-                <label htmlFor="model_color">Vehicle color</label>
-            </div>
-            <div className={styles.input_box}>
-                <input type="number" id="model_scratch" />
+                <input type="text" id="model_scratch" />
                 <label htmlFor="model_scratch">Major Scratches</label>
             </div>
             <div className={styles.input_box}>

@@ -5,8 +5,8 @@ const PostModel = require("../models/post.model");
 exports.getAllPost = async (req, res) => {
     try {
         // get cars data with OEM details and dealer's username
-        const posts = await PostModel.find(filter).populate('oemSpec').populate('dealer', 'username').exec();
-        res.status(200).send({ message: "successfully posted", data: posts });
+        const posts = await PostModel.find().populate('oemSpec').populate('dealer', 'username').exec();
+        res.status(200).send({ message: "successfully posted", posts });
     } catch (error) {
         console.log('error:', error)
         res.status(500).send({ message: error.message });
@@ -18,11 +18,13 @@ exports.addPost = async (req, res) => {
     const { userId } = req.body;
     req.body.dealer = userId;
     const payload = req.body;
+    console.log(req.body)
     try {
         let newPost = new PostModel(payload);
         await newPost.save();
         res.status(200).send({ message: "Post added succesfully", post: newPost });
     } catch (e) {
+        console.log(e);
         res.status(500).send({ message: e.message });
     }
 };
