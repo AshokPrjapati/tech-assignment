@@ -1,5 +1,5 @@
 import Modal from './Modal';
-import styles from "./AddCarModel.module.css"
+import styles from "../../styles/AddCarModel.module.css";
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-hot-toast';

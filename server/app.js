@@ -4,6 +4,7 @@ const cors = require("cors");
 const { connection } = require("./config/db");
 const { UserRouter } = require("./routes/user.routes");
 const PostRouter = require("./routes/post.routes");
+const OEM_Router = require("./routes/oem.routes");
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 // routes 
 app.use("/user", UserRouter);
 app.use("/post", PostRouter);
+app.use("/oem", OEM_Router);
 
 app.get("/", (req, res) => {
     res.send("Home Page")
@@ -26,17 +28,15 @@ app.get("*", (req, res) => {
     res.status(404).json("not found")
 })
 
-app.use(function (err, req, res, next) {
-    res.send("Error")
-})
 
-// connection to sever and db
-const port = process.env.PORT || 8080
-app.listen(port, async () => {
+// app listener
+app.listen(process.env.PORT || 8080, async () => {
     try {
+        console.log(`server running on port ${process.env.PORT || 8080}`);
+        console.log('⏳ Databse connecting...');
         await connection;
-        console.log("server is running at port:", port);
+        console.log('✅ Database connected.');
     } catch (error) {
-        console.log('error: ', error);
+        console.log('❌ error:', error);
     }
 })

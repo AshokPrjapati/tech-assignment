@@ -44,7 +44,7 @@ exports.UserLogin = async (req, res) => {
             const isMatched = await bcrypt.compare(password, user.password);
             delete user.password;
             if (isMatched) {
-                const token = await jwt.sign({ email }, process.env.SECRET_KEY);
+                const token = await jwt.sign({ userId: user._id }, process.env.SECRET_KEY);
                 res.status(201).json({ message: "Login Success", credentials: user, token })
             } else {
                 res.status(401).json({ message: "password not matched" })

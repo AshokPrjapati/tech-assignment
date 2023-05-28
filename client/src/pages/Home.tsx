@@ -3,7 +3,7 @@ import { Dispatch } from "redux";
 import { getPosts } from "../redux/post/getPost/getPost.action";
 import { RootState } from "../redux/store";
 import { useEffect } from "react"
-import styles from "./Home.module.css"
+import styles from "../styles/Home.module.css";
 import Post from "../components/post/Post";
 import { CarDetailsProps } from "../constant/constant";
 
@@ -16,14 +16,13 @@ const Home = () => {
     useEffect(() => {
         dispatch(getPosts);
     }, [])
-    return (
 
+    return (
         <div className={styles.container}>
             {allPosts.length !== 0 &&
                 allPosts?.map((post: CarDetailsProps) => <Post key={post._id} {...post} />)
             }
         </div>
-
     )
 }
 

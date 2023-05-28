@@ -1,5 +1,5 @@
 import { CarDetailsProps } from "../../constant/constant";
-import styles from "./Post.module.css";
+import styles from "../../styles/Post.module.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 
@@ -14,7 +14,7 @@ const Post = ({
     odometerKM,
     majorScratch,
     accidents,
-    email,
+    dealer,
 }: CarDetailsProps) => {
     const user = useSelector((store: RootState) => store.auth.userCredential);
     return (
@@ -32,7 +32,7 @@ const Post = ({
                 <p>Major straches: {majorScratch}</p>
                 <p>Accidents: {accidents}</p>
             </div>
-            {email === user.email}{
+            {dealer === user._id}{
                 <div className={styles.btns}>
                     <button className={styles.update}>Update</button>
                     <button className={styles.delete}>Delete</button>

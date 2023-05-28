@@ -1,6 +1,6 @@
 import { FormEvent, useRef, useState } from "react";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
-import styles from "./Authentication.module.css";
+import styles from "../styles/Authentication.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { login, signup } from "../redux/auth/auth.action";
 import { useNavigate } from "react-router-dom";

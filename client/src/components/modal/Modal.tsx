@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { IoMdClose } from "react-icons/io"
-import styles from "./Modal.module.css"
+import styles from "../../styles/Modal.module.css";
 import Button from '../Button';
 
 interface ModalProps {

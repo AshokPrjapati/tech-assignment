@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import styles from "./Navbar.module.css";
+import styles from "../../styles/Navbar.module.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 

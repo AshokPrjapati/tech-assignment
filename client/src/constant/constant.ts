@@ -13,17 +13,27 @@ export interface AuthInitialStateProps{
 }
 
 export interface CarDetailsProps{
+    _id?: string;
+    dealer?: string;
+    oemSpec: string;
+    carImage: string;
+    odometer: number;
+    majorScratches: string;
+    originalPaint: boolean;
+    noOfAccidents: number;
+    noOfPreviousBuyers: number;
+    registrationPlace: string;
+}
+
+
+export interface OEMsSpecProps{
     _id?:string;
-    modelImage:string;
-    modelName:string; 
-    modelYear:string; 
-    modelPrice:number; 
-    modelColor:string; 
-    modelMileage:number; 
-    odometerKM:number; 
-    majorScratch:string; 
-    accidents:number; 
-    buyers:number; 
-    registerPlace:string;
-    email?:string
+    brand:  string ;
+    model:  string ;
+    year:  number ;
+    listPrice:  number ;
+    colors:  string[] ;
+    mileage:  number ;
+    power:  number ;
+    maxSpeed:  number ;
 }

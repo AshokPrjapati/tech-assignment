@@ -1,5 +1,5 @@
 import { IconType } from "react-icons/lib";
-import styles from "./Button.module.css"
+import styles from "../styles/Button.module.css"
 
 type props = {
     label: string;
@@ -7,7 +7,8 @@ type props = {
     disabled?: boolean;
     outline?: boolean;
     small?: boolean;
-    icon?: IconType
+    icon?: IconType;
+    selectedOem?: string
 }
 
 const Button = ({ label, onClick, disabled, outline, small, icon: Icon }: props) => {
