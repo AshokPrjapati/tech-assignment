@@ -1,11 +1,10 @@
-import React from "react";
 import { CarDetailsProps } from "../../constant/constant";
 import styles from "./Post.module.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 
 
-const Post = ({ _id,
+const Post = ({
     modelImage,
     modelName,
     modelYear,

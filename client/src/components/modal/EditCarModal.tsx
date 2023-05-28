@@ -12,7 +12,7 @@ const EditCarModal = ({ isOpen, onClose }: EditCarModalProps) => {
             onClose={onClose}
             title="Edit Car Detail"
             actionLabel="Edit Car detail"
-            onSubmit={() => { }}
+            onSubmit={() => console.log("ap")}
         />
     )
 }

@@ -1,14 +1,10 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { Navigate } from "react-router-dom";
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
-interface PrivateRouteProps {
-    children: ReactNode;
-}
-
-const PrivateRoute = ({ children }: PrivateRouteProps) => {
+const PrivateRoute = ({ children }: any) => {
     const { authenticated } = useSelector((store: RootState) => store.auth);
     console.log(authenticated)
     const [isAuthenticated, setIsAuthenticated] = useState(authenticated);
@@ -19,9 +15,9 @@ const PrivateRoute = ({ children }: PrivateRouteProps) => {
 
     if (isAuthenticated) return children;
 
-    useEffect(() => {
-        toast.error("Please sign in to continue");
-    }, []); // Add an empty dependency array to ensure it only runs once
+
+    toast.error("Please sign in to continue");
+    // Add an empty dependency array to ensure it only runs once
 
     return <Navigate to="/auth" />;
 };

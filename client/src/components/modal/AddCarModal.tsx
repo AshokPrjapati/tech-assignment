@@ -1,6 +1,6 @@
 import Modal from './Modal';
 import styles from "./AddCarModel.module.css"
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-hot-toast';
 import { Dispatch } from 'redux';
@@ -12,34 +12,37 @@ interface AddCarModalProps {
 }
 
 const AddCarModal = ({ isOpen, onClose }: AddCarModalProps) => {
-    const bodyRef = useRef(null);
+    const bodyRef: React.MutableRefObject<any> = useRef(null);
     const dispatch: Dispatch<any> = useDispatch();
-    const loading: boolean = useSelector((store: RootState) => store.addPost);
+    const { loading } = useSelector((store: RootState) => store.addPost);
 
     let imgUrl: string;
 
     // handle the image upload
     const handleImage = async () => {
+        if (bodyRef.current) {
+            try {
+                const imgInput = bodyRef.current.model_image;
+                const img = imgInput.files[0];
 
-        try {
-            const imgInput = bodyRef.current.model_image;
-            const img = imgInput.files[0];
+                const form = new FormData();
+                form.append("image", img);
 
-            const form = new FormData();
-            form.append("image", img);
+                const res = await fetch(import.meta.env.VITE_IMGBB_URL, {
+                    method: 'POST',
+                    body: form
+                });
+                const data = await res.json();
 
-            const res = await fetch(import.meta.env.VITE_IMGBB_URL, {
-                method: 'POST',
-                body: form
-            });
-            const data = await res.json();
+                imgUrl = data.data.display_url
+                console.log(imgUrl);
 
-            imgUrl = data.data.display_url
-            console.log(imgUrl);
-
-        } catch (error) {
-            console.log(error);
+            } catch (error) {
+                console.log(error);
+            }
         }
+
+
     }
 
     const handleSubmit = () => {

@@ -16,7 +16,7 @@ const Authentication = () => {
     const dispatch: Dispatch<any> = useDispatch();
     const navigate = useNavigate();
 
-    const formRef = useRef(null);
+    const formRef: React.MutableRefObject<any> = useRef(null);
 
     // handel the submission of form
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
