@@ -6,13 +6,12 @@ import { useEffect } from "react"
 import styles from "../styles/Home.module.css";
 import Post from "../components/post/Post";
 import { CarDetailsProps } from "../constant/constant";
+import Loader from "../components/Loader";
 
 
 const Home = () => {
-    const { allPosts } = useSelector((store: RootState) => store.getPosts);
+    const { allPosts, loading } = useSelector((store: RootState) => store.getPosts);
     const dispatch: Dispatch<any> = useDispatch();
-
-    console.log(allPosts)
 
     useEffect(() => {
         dispatch(getPosts());
@@ -20,6 +19,7 @@ const Home = () => {
 
     return (
         <div className={styles.container}>
+            {loading && <Loader />}
             {allPosts.length !== 0 &&
                 allPosts?.map((post: CarDetailsProps) => <Post key={post._id} {...post} />)
             }

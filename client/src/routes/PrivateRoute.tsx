@@ -6,7 +6,6 @@ import { toast } from "react-hot-toast";
 
 const PrivateRoute = ({ children }: any) => {
     const { authenticated } = useSelector((store: RootState) => store.auth);
-    console.log(authenticated)
     const [isAuthenticated, setIsAuthenticated] = useState(authenticated);
 
     useEffect(() => {

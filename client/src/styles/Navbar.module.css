@@ -1,5 +1,5 @@
 .navbar {
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     padding: 1.5rem;
@@ -7,7 +7,7 @@
     border-bottom: 1px solid;
     box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5);
     font-size: 1.1rem;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-image: linear-gradient(to right, rgba(173, 193, 254, 0.898), rgba(255, 157, 157, 0.687));
     margin-bottom: 1rem;
 }
 
@@ -20,12 +20,12 @@
 }
 
 .active {
-    color: rgb(17, 174, 17);
+    color: rgb(3, 185, 3);
     font-weight: bold;
     text-decoration: none;
 }
 
 .default {
-    color: grey;
+    color: #000;
     text-decoration: none;
 }

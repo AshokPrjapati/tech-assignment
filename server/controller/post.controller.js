@@ -5,7 +5,7 @@ const PostModel = require("../models/post.model");
 exports.getAllPost = async (req, res) => {
     try {
         // get cars data with OEM details and dealer's username
-        const posts = await PostModel.find().populate('oemSpec').populate('dealer', 'username').exec();
+        const posts = await PostModel.find().populate('oemSpec').populate('dealer', 'name').exec();
         res.status(200).send({ message: "successfully posted", posts });
     } catch (error) {
         console.log('error:', error)
@@ -38,7 +38,7 @@ exports.updatePost = async (req, res) => {
     try {
         if (email_post !== email_req) return res.status(401).send({ message: "You are not authorized to update post" });
         await PostModel.findByIdAndUpdate({ _id: id }, req.body);
-        res.send({ message: "post updated successfully" })
+        res.send({ message: "car details updated successfully" })
     } catch (e) {
         res.status(500).send({ message: e.message })
     }
@@ -53,7 +53,7 @@ exports.deletePost = async (req, res) => {
     try {
         if (email_post !== email_req) return res.status(401).send({ message: "You are not authorized to delete post" });
         await PostModel.findByIdAndDelete({ _id: id });
-        res.send({ message: "post deleted successfully" })
+        res.send({ message: "Car detail deleted successfully" })
     } catch (e) {
         res.status(500).send({ message: e.message })
     }

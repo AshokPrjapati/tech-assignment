@@ -11,21 +11,6 @@ export interface AuthInitialStateProps{
     authenticated: boolean
     userCredential: UserProps
 }
-
-export interface CarDetailsProps{
-    _id?: string;
-    dealer?: string;
-    oemSpec: string;
-    carImage: string;
-    odometer: number;
-    majorScratches: string;
-    originalPaint: boolean;
-    noOfAccidents: number;
-    noOfPreviousBuyers: number;
-    registrationPlace: string;
-}
-
-
 export interface OEMsSpecProps{
     _id?:string;
     brand:  string ;
@@ -37,3 +22,18 @@ export interface OEMsSpecProps{
     power:  number ;
     maxSpeed:  number ;
 }
+
+type dealer = { _id : string, name:string}
+export interface CarDetailsProps{
+    _id?: string;
+    dealer?: dealer;
+    oemSpec?: string | OEMsSpecProps;
+    carImage: string ;
+    odometer: number;
+    majorScratches: string;
+    originalPaint: boolean;
+    noOfAccidents: number;
+    noOfPreviousBuyers: number;
+    registrationPlace: string;
+}
+

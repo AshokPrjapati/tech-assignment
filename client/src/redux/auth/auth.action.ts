@@ -68,3 +68,7 @@ export const signup =
       toast.error(error?.response?.data?.message || "something went wrong");
     }
   };
+
+
+  // logout
+  export const logout = () => ({type: Types.SIGNOUT_SUCCESS});

@@ -6,6 +6,7 @@ import { reducer as AddPostReducer } from "./post/addPost/addPost.reducer";
 import { reducer as UpdatePostReducer } from "./post/updatePost/updatePost.reducer";
 import { reducer as GetPostReducer } from "./post/getPost/getPost.reducer";
 import { reducer as OEMsReducer } from "./oems/oems.reducer";
+import { reducer as DeletePostReducer } from "./post/deletePost/deletePost.reducer";
 
 
 declare global {
@@ -22,7 +23,8 @@ const RootReducers = {
      addPost:AddPostReducer,
      updatePost: UpdatePostReducer,
      getPosts:GetPostReducer,
-     oem:OEMsReducer
+     oem:OEMsReducer,
+     deletePost:DeletePostReducer
 }
 
 export const store = legacy_createStore(combineReducers(RootReducers), composeEnhancers(applyMiddleware(thunk)));

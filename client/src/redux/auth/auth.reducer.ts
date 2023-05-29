@@ -24,8 +24,14 @@ export const Reducer = (state = initialState, { type, payload }: any) => {
                return ({ ...state, loading: false, error: '' });
           case Types.AUTH_OPERATION_SUCCESS:
                return ({ ...state, loading: false, error: '', });
-          case Types.SIGNOUT_SUCCESS:
-               return initialState;
+          case Types.SIGNOUT_SUCCESS:{
+               sessionStorage.clear();
+               return {
+                    ...state,
+                    authenticated: false,
+                    userCredential:null
+               };  
+               }
           default: return state;      
      }
 }

@@ -1,0 +1,36 @@
+.loader {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+}
+
+.loader>div {
+    width: 100px;
+    height: 100px;
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top-color: royalblue;
+    animation: spin 1s linear infinite;
+    transition: transform .5s ease-in-out;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(40deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
