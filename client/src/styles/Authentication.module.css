@@ -11,8 +11,9 @@
     text-align: center;
     border-radius: 5px;
     backdrop-filter: blur(5px);
-    background-color: rgba(0, 0, 0, 0.1);
+    background-image: linear-gradient(to right, rgba(173, 193, 254, 0.898), rgba(255, 157, 157, 0.687));
     min-width: 320px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 
 form {
@@ -48,7 +49,7 @@ form {
 
 .input_box>label {
     position: absolute;
-    color: grey;
+    color: black;
     left: 5px;
     top: 0;
     letter-spacing: 2px;
@@ -71,7 +72,32 @@ input:not(:placeholder-shown)~label {
     font-size: 1rem;
 }
 
-input[type="submit"],
+
+input[type="submit"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    position: relative;
+    border-radius: 5px;
+    width: max-content;
+    cursor: pointer;
+    margin: auto;
+    color: grey;
+    padding: .3rem .5rem;
+    background: royalblue;
+    color: #fff;
+    transition: all .2s;
+}
+
+input[type="submit"]:hover {
+    opacity: 80;
+    scale: 1.05;
+    background: #fff;
+    color: royalblue;
+}
+
+
 .form_submit>span {
     cursor: pointer;
     padding: .4rem .8rem;
@@ -80,6 +106,9 @@ input[type="submit"],
 .form_submit>span {
     border-radius: 5px;
     border: 1px solid transparent;
+    color: royalblue;
+    text-decoration: underline;
+    font-weight: 600;
 }
 
 .form_submit>span:hover {

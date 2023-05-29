@@ -1,7 +1,6 @@
 import { Dispatch } from "redux";
 import * as Types from "./oems.types"
-import axios from "axios";
-
+import {axiosInstance as axios} from "../../provider/AxiosInstance";
 
 export const getAllOEMs = () => async(dispatch:Dispatch) =>{
     dispatch({type:Types.OEMS_LOADING});

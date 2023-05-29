@@ -1,4 +1,4 @@
-import axios from "axios";
+import {axiosInstance as axios} from "../../provider/AxiosInstance";
 import * as Types from "./auth.types";
 import { UserProps } from "../../constant/constant";
 import { Dispatch } from "redux";

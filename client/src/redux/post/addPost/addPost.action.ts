@@ -1,7 +1,7 @@
 import { Dispatch } from "redux";
 import { CarDetailsProps } from "../../../constant/constant";
 import * as Types from "./addPost.types"
-import axios from "axios";
+import {axiosInstance as axios} from "../../../provider/AxiosInstance";
 
 export const CreatePost = (carDetails:CarDetailsProps,onClose:() => void, toast:any) => async(dispatch:Dispatch)=>{
     dispatch({type:Types.ADD_POST_LOADING});

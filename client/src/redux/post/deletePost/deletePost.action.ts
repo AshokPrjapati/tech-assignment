@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import * as Types from "./deletePost.types"
-import axios from "axios";
+import {axiosInstance as axios} from "../../../provider/AxiosInstance";
 import { getPosts } from "../getPost/getPost.action";
 
 
