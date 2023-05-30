@@ -55,7 +55,6 @@ CarSpec is a marketplace for second-hand cars. It includes features such as OEM 
 - Dashboard page with add inventory and oems table - protected page
 - signin / sinup Page
 - profile Page
-- Order Summary Page
 
 <br />
 
