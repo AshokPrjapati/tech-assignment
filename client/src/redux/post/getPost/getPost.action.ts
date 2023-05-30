@@ -1,7 +1,6 @@
 import { Dispatch } from "redux";
 import * as Types from "./getPost.types"
-import axios from "axios";
-
+import {axiosInstance as axios} from "../../../provider/AxiosInstance";
 
 export const getPosts = () => async(dispatch:Dispatch)=>{
     dispatch({type:Types.GET_POST_LOADING});

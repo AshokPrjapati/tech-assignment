@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
 import { getPosts } from "../redux/post/getPost/getPost.action";
 import { RootState } from "../redux/store";
-import { useEffect } from "react"
+import { useCallback, useEffect } from "react"
 import styles from "../styles/Home.module.css";
 import Post from "../components/post/Post";
 import { CarDetailsProps } from "../constant/constant";
@@ -15,7 +15,7 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(getPosts());
-    }, [])
+    }, []);
 
     return (
         <div className={styles.container}>

@@ -1,22 +1,60 @@
-table caption {
+.table_container {
+    overflow-x: auto;
+    max-width: 95%;
+    margin: 0 auto;
+    padding: 0;
+}
+
+h1 {
+    width: 100%;
     font-size: 20px;
     text-transform: uppercase;
     font-weight: 600;
     padding: 5px;
     color: brown;
-    margin-bottom: 1rem;
+    margin: 1rem auto;
+    text-align: center;
 }
 
 table {
     font-size: 18px;
-    margin: 1rem auto;
-    border-collapse: collapse;
+    margin: .5rem auto;
+    border-spacing: 0;
 }
 
 th,
 td {
     padding: 5px;
     border: 1px solid brown;
+    white-space: nowrap;
+    width: min-content;
+}
+
+
+th:nth-child(1),
+td:nth-child(1) {
+    position: sticky;
+    left: 0;
+}
+
+th:nth-child(1),
+td:nth-child(1),
+th:nth-child(2),
+td:nth-child(2) {
+    background-color: royalblue;
+    color: #fff;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+    box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+
+th:nth-child(2),
+td:nth-child(2) {
+    position: sticky;
+    left: 3.6rem;
 }
 
 tr>td:nth-of-type(1) {
@@ -41,6 +79,6 @@ table button {
     cursor: pointer;
 }
 
-table button:HOVER {
+table button:hover {
     scale: 1.05;
 }

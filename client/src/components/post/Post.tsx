@@ -98,7 +98,7 @@ const Post = (carDetails: CarDetailsProps) => {
           </div>
         </div>
         <div className={styles.dealer_spec}>
-          <h3>Delear Specifications</h3>
+          <h3>Dealer Specifications</h3>
 
           <div>
             <bdi>Dealer: </bdi>
@@ -131,7 +131,7 @@ const Post = (carDetails: CarDetailsProps) => {
             </div>
           </div>
           <div>
-            {user?._id == dealer?._id && (
+            {user?._id == dealer?._id ? (
               <div className={styles.btns}>
                 <Button
                   label={"Edit Car Details"}
@@ -144,7 +144,7 @@ const Post = (carDetails: CarDetailsProps) => {
                   onClick={handleDelete}
                 />
               </div>
-            )}
+            ) : <div className={styles.btns}><Button label={"Buy Car"} onClick={() => user?._id ? toast.success("Thank you, we will contact you soon") : toast.error("Please login to continue")} /></div>}
           </div>
         </div>
       </div>
